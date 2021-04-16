@@ -1,9 +1,10 @@
-actions = {"小爱": 0, "再见":10,"没有了":10, "开": 1, "关":2,"查看":6,"窗帘":3,"灯":4, "电视":5,"实时资讯":7,"饮食健议":8,"医药资料":9} #objects
+actions = {"小愛": 0, "再見":10,"沒有了":10, "開": 1, "關":2,"查看":6,"窗簾":3,"燈":4, "電視":5,"實時資訊":7,"飲食健議":8,"醫藥資料":9} #objects
           
-medical_records= {"实时资讯":{"current time": '09:41',"heart rate":75, "oxygen in blood":95, "sleeping hours (h)":8,\
-                         'proportion of deep sleep (%)':30}, \
-                  "饮食健议":{"Disease":"Hypertension",}, \
-                  "医药资料":{"蘇拉通(Spirotone)":{"藥理作用":"抑制腎臟對納和鉀的再吸收，增加鈉離子及水分排泄，降低血壓",\
+medical_records= {"實時資訊":{"現在時間": '09:41',"心率":75, "血氧含量":95, "睡眠時間 (h)":8,\
+                         '深層睡眠比例 (%)':30}, \
+                  "飲食健議":{"疾病":"高血壓","健議飲食習慣":{"一高五低":['高膳食纖維','低脂肪','低鹽','低糖','低膽固醇','低熱量']},\
+                          "健議食物":['玉米','雞胸肉','菠菜']},\
+                  "醫藥資料":{"蘇拉通(Spirotone)":{"藥品種類":"利尿劑","藥理作用":"抑制腎臟對納和鉀的再吸收，增加鈉離子及水分排泄，降低血壓",\
                                            "常見副作用":"可能會引起低血鉀、電解質改變",\
                                            "注意事項":["為避免夜尿，建議於早上服用","最後一次服藥勿 超過下午六點"]}}}
 
@@ -28,13 +29,13 @@ def command(patient_response):
     #different responses and actions will be called according to the action code
     
     if action_code == "0":
-        reaction="您好，我可以如何帮您呢？"
+        reaction="您好，我可以如何幫您呢？"
         option=-1
     elif action_code =="":
-        reaction = "对不起，不明白您的指示，请再说一次"
+        reaction = "對不起，不明白您的指示，請再說一次"
         option = -1
     elif "10" in action_code:
-        reaction = "再见！"
+        reaction = "再見！"
         option = -1  #option -1 is for actions other than option 0 and >0
     else:
         for c in range(len(action_code)):
@@ -46,12 +47,12 @@ def command(patient_response):
     
     #option 0 is for controlling IoMT in the hospital room
     if option == 0:
-        reaction = "好的，现在为你"
+        reaction = "好的，現在為你"
         for x in range(len(action_code)):
             if action_code[x]>="6" and action_code[x]!="0":
-                 reaction = "对不起，不明白您的指示，请再说一次"
+                 reaction = "對不起，不明白您的指示，請再說一次"
             elif action_code[x]=="1":
-                reaction = reaction + "开"
+                reaction = reaction + "開"
                 for keyword, code_number in actions.items():
                     if x==len(action_code)-1:
                         break
@@ -61,7 +62,7 @@ def command(patient_response):
 
                 
             elif action_code[x]=="2":
-                reaction = reaction + "关"
+                reaction = reaction + "關"
                 for keyword, code_number in actions.items():
                     if x==len(action_code)-1:
                         break
@@ -69,21 +70,21 @@ def command(patient_response):
                         reaction = reaction + keyword
                         break
                     else:
-                        reaction = "对不起，不明白您的指示，请再说一次"
+                        reaction = "對不起，不明白您的指示，請再說一次"
                         
             elif x==len(action_code)-1:
                 pass
             elif action_code[x+1]>="6":
-                reaction = "对不起，不明白您的指示，请再说一次"
+                reaction = "對不起，不明白您的指示，請再說一次"
           
-        if reaction[-1]=="开" or reaction[-1]=="关":
-            reaction = "对不起，不明白您的指示，请再说一次"
+        if reaction[-1]=="開" or reaction[-1]=="關":
+            reaction = "對不起，不明白您的指示，請再說一次"
         
-        if reaction == "好的，现在为你":
-            reaction = "对不起，不明白您的指示，请再说一次"
+        if reaction == "好的，現在為你":
+            reaction = "對不起，不明白您的指示，請再說一次"
             
-        if "对不起，不明白您的指示，请再说一次" not in reaction:
-            reaction= reaction + '\n' + '还有其他需要吗？'
+        if "對不起，不明白您的指示，請再說一次" not in reaction:
+            reaction= reaction + '\n' + '還有其他需要嗎？'
         
         
     # option>0 is for patients checking medical records 
@@ -91,7 +92,7 @@ def command(patient_response):
         reaction = "好的，以下是您的"
         for x in range(len(action_code)):
             if action_code[x]<"6" and action_code[x]!="0":
-                 reaction = "对不起，不明白您的指示，请再说一次"
+                 reaction = "對不起，不明白您的指示，請再說一次"
             if action_code[x] in "6789":
                 for keyword, code_number in actions.items():
                     if x==len(action_code)-1:
@@ -101,12 +102,12 @@ def command(patient_response):
                         break
             
         if reaction == "好的，以下是您的":
-            reaction = "对不起，不明白您的指示，请再说一次"
+            reaction = "對不起，不明白您的指示，請再說一次"
         
         if patient_response[-2:]== "查看":
-            reaction = "对不起，不明白您的指示，请再说一次"   
+            reaction = "對不起，不明白您的指示，請再說一次"   
     
-        if "对不起，不明白您的指示，请再说一次" not in reaction:
-            reaction= reaction + '\n' + '还有其他需要吗？'
+        if "對不起，不明白您的指示，請再說一次" not in reaction:
+            reaction= reaction + '\n' + '還有其他需要嗎？'
           
     return print(reaction)
