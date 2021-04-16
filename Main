@@ -69,8 +69,6 @@ def command(patient_response):
                     elif action_code[x+1] == str(code_number):
                         reaction = reaction + keyword
                         break
-                    else:
-                        reaction = "對不起，不明白您的指示，請再說一次"
                         
             elif x==len(action_code)-1:
                 pass
