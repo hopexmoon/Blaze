@@ -1,11 +1,23 @@
-patient_response="小爱请帮我开灯"
+patient_response="小愛請幫我開燈"
 command(patient_response)
+#XiaoAi's response: 
+  #好的，現在為你開燈
+  #還有其他需要嗎？
 
-patient_response="我想查看实时资讯"
+patient_response="我想查看實時資訊"
 command(patient_response)
+#XiaoAi's response: 
+  #好的，以下是您的實時資訊: 
+  #{'現在時間': '09:41', '心率': 75, '血氧含量': 95, '睡眠時間 (h)': 8, '深層睡眠比例 (%)': 30}
+  #還有其他需要嗎？
 
-patient_response="关窗帘"
+patient_response="關窗簾"
 command(patient_response)
+#XiaoAi's response:
+  #好的，現在為你關窗簾
+  #還有其他需要嗎？
 
-patient_response="再见"
+patient_response="再見"
 command(patient_response)
+#XiaoAi's response:
+  #再見！
