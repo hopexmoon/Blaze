@@ -1,0 +1,11 @@
+patient_response="小爱请帮我开灯"
+command(patient_response)
+
+patient_response="我想查看实时资讯"
+command(patient_response)
+
+patient_response="关窗帘"
+command(patient_response)
+
+patient_response="再见"
+command(patient_response)
