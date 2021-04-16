@@ -30,9 +30,6 @@ def command(patient_response):
     if action_code == "0":
         reaction="您好，我可以如何帮您呢？"
         option=-1
-    #elif lst == []:
-        #reaction = ""
-        #option=-1
     elif action_code =="":
         reaction = "对不起，不明白您的指示，请再说一次"
         option = -1
@@ -93,8 +90,8 @@ def command(patient_response):
     elif option>0:
         reaction = "好的，以下是您的"
         for x in range(len(action_code)):
-            #if action_code[x]<="6" and action_code[x]!="0":
-                 #reaction = "对不起，不明白您的指示，请再说一次"
+            if action_code[x]<"6" and action_code[x]!="0":
+                 reaction = "对不起，不明白您的指示，请再说一次"
             if action_code[x] in "6789":
                 for keyword, code_number in actions.items():
                     if x==len(action_code)-1:
@@ -102,11 +99,7 @@ def command(patient_response):
                     elif action_code[x+1] == str(code_number):
                         reaction = reaction + keyword + ': \n'+str(medical_records[keyword])
                         break
-                    #elif action_code[x+1]<=str(6):
-                        #reaction = "对不起，不明白您的指示，请再说一次"
-            #elif action_code:
-                #reaction = "对不起，不明白您的指示，请再说一次"
-        
+            
         if reaction == "好的，以下是您的":
             reaction = "对不起，不明白您的指示，请再说一次"
         
